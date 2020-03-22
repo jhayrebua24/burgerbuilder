@@ -1,11 +1,12 @@
-import React from 'react'
+import React from 'react';
+import { Dialog } from '../components/StyledComponents';
 
-const Ingredients = () => {
-  return (
-    <div>
-      Ingredients
-    </div>
-  )
-}
+const Ingredients = () => (
+  <>
+    <Dialog>
+      <p>SUCCESS</p>
+    </Dialog>
+  </>
+)
 
 export default Ingredients

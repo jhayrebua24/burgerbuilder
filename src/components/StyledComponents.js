@@ -21,7 +21,7 @@ export const Content = styled.div`
 
 export const Header = styled.h1`
   margin: 0 0 15px 0;
-  padding: 40px 5px;
+  padding: 20px 5px;
   border-radius: 3px;
   text-align: center;
   font-size: 48px;
@@ -29,6 +29,14 @@ export const Header = styled.h1`
   text-transform: uppercase;
   background-color: #e74c3c;
   color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & img {
+    width: 100px;
+    height: 100px;
+  }
 `;
 
 const ButtonAndLinkStyle = css`
@@ -45,7 +53,7 @@ const ButtonAndLinkStyle = css`
   border-radius: 3px;
 
   :hover {
-    opacity: 90%;
+    opacity: ${(props) => (props.disabled ? 0.6 : 0.9)};
   }
 `;
 
@@ -68,6 +76,8 @@ const CardCSs = css`
 
 export const Button = styled.button`
   ${ButtonAndLinkStyle}
+  margin: 0;
+  opacity: ${(props) => (props.disabled ? 0.6 : 1)};
 `;
 
 export const StyledLink = styled(Link)`
@@ -111,20 +121,31 @@ export const BuildBurger = styled.div`
   text-align: center;
 
   & h2 {
-    font-weight: 500;
-    align-selft: flex-start;
     text-transform: uppercase;
-    height: 50px;
+  }
+
+  @media (max-width: 768px) {
+    width: 60%;
+  }
+  @media (max-width: 590px) {
+    width: 100%;
   }
 `;
 
 export const BurgerIngredients = styled.div`
   ${CardCSs}
   width: 30%;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height: 550px;
   margin: 10px 0;
+
+  @media (max-width: 768px) {
+    width: 35%;
+  }
+  @media (max-width: 590px) {
+    width: 100%;
+  }
 `;
 
 export const ContentSelector = styled.div`
@@ -146,4 +167,50 @@ export const BurgerPrice = styled.div`
   ${CardCSs}
   margin: 10px 0;
   width: 25%;
+  justify-content: flex-start;
+
+  @media (max-width: 768px) {
+    width: 40%;
+  }
+
+  @media (max-width: 590px) {
+    width: 100%;
+  }
+`;
+
+export const Input = styled.input`
+  padding: 8px 5px;
+  width: 100%;
+  box-sizing : border-box;
+  margin: 0;
+  text-transform: capitalize;
+  border-radius: 2px;
+  border: 1px solid #27ae60;
+  opacity: ${(props) => (props.disabled ? 0.6 : 1)};
+`
+
+export const Dialog = styled.div`
+  width: 400px;
+  overflow: hidden;
+  background-color: #ffffff;
+  border: 2px solid #27ae60;
+  border-radius: 8px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  & div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 30px;
+  }
+  & p {
+    font-size: 24px;
+  }
+
+  & button {
+    margin-top: 5px;
+  }
 `;

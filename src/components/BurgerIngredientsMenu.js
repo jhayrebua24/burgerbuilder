@@ -16,6 +16,7 @@ const BurgerIngredientsMenu = (props) => {
   } = props;
   return (
     <BurgerIngredients>
+      <h2>Fun Stuffs!</h2>
       {ingredients.map((ingr) => (
         <ContentSelector key={ingr.id}>
           <Button
@@ -43,6 +44,7 @@ const BurgerIngredientsMenu = (props) => {
       >
         REMOVE ALL
       </Button>
+      <h5>Limited up to 8 stuffs only!</h5>
     </BurgerIngredients>
   )
 }

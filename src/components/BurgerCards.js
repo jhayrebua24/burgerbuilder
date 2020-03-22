@@ -11,7 +11,7 @@ const BurgerCards = ({ data }) => {
     let price = 0;
     if (ingr) price = ingr.price;
     return accu + price;
-  }, 0).toFixed(2);
+  }, 20).toFixed(2);
   return (
     <Cards>
       <p>{data.name}</p>

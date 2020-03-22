@@ -60,11 +60,30 @@ const BurgerContextWrapper = ({ children }) => {
   };
   const [burgerValues, dispatch] = useReducer(reducer, defaultValue);
 
+  const addBurger = (value) => new Promise((resolve, reject) => {
+    const { burgerName, burgerContents } = value;
+    const newBuild = {
+      id: uuidv4(),
+      name: burgerName,
+      contents: burgerContents,
+    }
+
+    dispatch({
+      type: ADD_BUILD,
+      payload: {
+        newBuild,
+      },
+    })
+
+    setTimeout(() => resolve('Burger Added'), 1000);
+  })
+
   return (
     <BurgerContext.Provider
       value={{
         burgerValues,
         ingredients,
+        addBurger,
       }}
     >
       {children}

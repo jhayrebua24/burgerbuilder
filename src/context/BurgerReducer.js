@@ -6,6 +6,14 @@ import {
 const reducer = (state = {}, action) => {
   const { payload, type } = action;
   switch (type) {
+  case ADD_BUILD:
+    return {
+      ...state,
+      builds: [
+        ...state.builds,
+        payload.newBuild,
+      ],
+    }
   default:
     return state;
   }
