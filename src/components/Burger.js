@@ -9,39 +9,50 @@ import {
   Bacon,
 } from './ingredients/burger';
 
-const Burger = ({ contents = [], isListed }) => (
-  contents.length > 0 && contents.map((content) => {
+const Burger = ({ contents = [] }) => {
+  const burger = contents.map((content) => {
     let Ingr = null;
 
     switch (content) {
     case 1:
-      Ingr = BreadTop;
-      break;
-    case 2:
-      Ingr = BreadBottom;
-      break;
-    case 3:
       Ingr = Meat;
       break;
-    case 4:
+    case 2:
       Ingr = Cheese;
       break;
-    case 5:
+    case 3:
       Ingr = Bacon;
       break;
-    case 6:
+    case 4:
       Ingr = Salad;
       break;
     default:
       Ingr = <div />;
     }
 
-    return <Ingr isListed={!!isListed}>{content}</Ingr>
-  })
-)
+    return (
+      <Ingr
+        key={Math.random(1, 9999999)}
+      >
+        {content}
+      </Ingr>
+    )
+  });
 
+  return (
+    <div
+      style={{
+        margin: '0 5px',
+      }}
+    >
+      <BreadTop />
+      {burger}
+      <BreadBottom />
+    </div>
+  )
+}
 
 Burger.propTypes = {
-  contents: PropTypes.arrayOf(PropTypes.object).isRequired,
+  contents: PropTypes.arrayOf(PropTypes.number).isRequired,
 }
 export default Burger

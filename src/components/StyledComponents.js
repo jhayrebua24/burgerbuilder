@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Container = styled.div`
   margin: 0 auto;
@@ -13,6 +14,9 @@ export const Content = styled.div`
   @media (max-width: 1170px) {
     padding: 0 10px;
   }
+  @media (max-width: 590px) {
+    padding: 0 50px;
+  }
 `;
 
 export const Header = styled.h1`
@@ -22,23 +26,57 @@ export const Header = styled.h1`
   text-align: center;
   font-size: 48px;
   font-weight: 500;
-  background-color: #10ac84;
+  text-transform: uppercase;
+  background-color: #e74c3c;
   color: #ffffff;
 `;
 
-export const Button = styled.button`
-  ${(props) => (props.block ? 'width: 100%;' : '')}
+const ButtonAndLinkStyle = css`
+  width: ${(props) => {
+    if (props.block) return '100%'
+    return props.width || 'auto'
+  }};
   padding: 7px 15px;
   color: #ffffff;
-  background-color: #00b894;
+  background-color: ${(props) => props.color || '#27ae60'};
   text-transform: uppercase;
   border: 0;
   font-size: 16px;
   border-radius: 3px;
+
+  :hover {
+    opacity: 90%;
+  }
+`;
+
+const CardCSs = css`
+  border: 2px solid #ffda79;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  & p {
+    margin: 0;
+    background-color: #ffb142;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: capitalize; 
+  }
+`;
+
+export const Button = styled.button`
+  ${ButtonAndLinkStyle}
+`;
+
+export const StyledLink = styled(Link)`
+  ${ButtonAndLinkStyle}
+  text-decoration: none;
 `;
 
 export const BurgerLists = styled.section`
-  margin: 10px 0;
+  margin: 15px 0;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 15px;
@@ -54,11 +92,58 @@ export const BurgerLists = styled.section`
 `;
 
 export const Cards = styled.div`
-  border: 2px solid #95afc0;
-  border-radius: 4px;
-  padding: 10px 5px;
-  & p {
-    color: #535c68;
-    text-align: center;
+  ${CardCSs}
+`;
+
+export const BuildSection = styled.section`
+  margin: 15px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-flow: wrap;
+`;
+
+export const BuildBurger = styled.div`
+  ${CardCSs}
+  margin: 10px 0;
+  width: 40%;
+  padding: 10px 10px;
+  text-align: center;
+
+  & h2 {
+    font-weight: 500;
+    align-selft: flex-start;
+    text-transform: uppercase;
+    height: 50px;
   }
+`;
+
+export const BurgerIngredients = styled.div`
+  ${CardCSs}
+  width: 30%;
+  justify-content: center;
+  align-items: center;
+  height: 550px;
+  margin: 10px 0;
+`;
+
+export const ContentSelector = styled.div`
+  margin: 10px 5px;
+  & span {
+    font-size: 18px;
+    padding: 0 10px;
+    padding-bottom: 3px;
+    margin: 0;
+    display: inline-block;
+    width: 60px;
+    text-align: center;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+  }
+`;
+
+export const BurgerPrice = styled.div`
+  ${CardCSs}
+  margin: 10px 0;
+  width: 25%;
 `;

@@ -6,13 +6,19 @@ import { BurgerContext } from '../context/BurgerContextWrapper';
 
 const BurgerCards = ({ data }) => {
   const { ingredients } = useContext(BurgerContext);
-  console.log(ingredients)
+  const getBurgerPrice = data.contents.reduce((accu, val) => {
+    const ingr = ingredients.find((ingredient) => ingredient.id === val);
+    let price = 0;
+    if (ingr) price = ingr.price;
+    return accu + price;
+  }, 0).toFixed(2);
   return (
     <Cards>
       <p>{data.name}</p>
       <Burger
         contents={data.contents}
       />
+      <p>{`PHP ${getBurgerPrice}`}</p>
     </Cards>
   )
 }

@@ -15,39 +15,23 @@ const BurgerContextWrapper = ({ children }) => {
   const ingredients = [
     {
       id: 1,
-      name: 'Bread Top',
-      price: 10,
-      maxAllowed: 1,
+      name: 'Meat',
+      price: 35,
     },
     {
       id: 2,
-      name: 'Bread Bottom',
-      price: 10,
-      maxAllowed: 1,
+      name: 'Cheese',
+      price: 8,
     },
     {
       id: 3,
-      name: 'Meat',
-      price: 35,
-      maxAllowed: 3,
+      name: 'Bacon',
+      price: 30,
     },
     {
       id: 4,
-      name: 'Cheese',
-      price: 8,
-      maxAllowed: 2,
-    },
-    {
-      id: 5,
-      name: 'Bacon',
-      price: 30,
-      maxAllowed: 2,
-    },
-    {
-      id: 6,
       name: 'Salad',
       price: 15,
-      maxAllowed: 2,
     },
   ]
   const defaultValue = {
@@ -55,22 +39,22 @@ const BurgerContextWrapper = ({ children }) => {
       {
         id: uuidv4(),
         name: 'Double Patty',
-        contents: [1, 4, 4, 3, 6, 2],
+        contents: [1, 1, 2],
       },
       {
         id: uuidv4(),
-        name: 'Double Patty',
-        contents: [1, 3, 3, 6, 2],
+        name: 'Cheeseburger',
+        contents: [1, 2],
       },
       {
         id: uuidv4(),
-        name: 'Double Patty',
-        contents: [1, 3, 3, 6, 2],
+        name: 'Burger',
+        contents: [1],
       },
       {
         id: uuidv4(),
-        name: 'Double Patty',
-        contents: [1, 3, 3, 6, 2],
+        name: 'Extreme Burger',
+        contents: [4, 1, 2, 3, 1, 4, 2, 3],
       },
     ],
   };

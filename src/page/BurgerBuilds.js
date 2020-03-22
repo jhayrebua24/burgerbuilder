@@ -3,30 +3,25 @@ import React, {
 } from 'react';
 import { BurgerContext } from '../context/BurgerContextWrapper';
 import BuildsList from '../components/BuildsList';
+import Wrapper from '../components/Wrapper';
 import {
-  Container,
-  Content,
-  Header,
-  Button,
+  StyledLink,
 } from '../components/StyledComponents';
 
-const Build = () => {
+const BurgerBuilds = () => {
   const {
     burgerValues,
   } = useContext(BurgerContext);
 
   const { builds } = burgerValues;
   return (
-    <Container>
-      <Header>BURGER BUILDER</Header>
-      <Content>
-        <Button>Build your burger!</Button>
-        <BuildsList
-          builds={builds}
-        />
-      </Content>
-    </Container>
+    <Wrapper>
+      <StyledLink to="/build">Build your burger!</StyledLink>
+      <BuildsList
+        builds={builds}
+      />
+    </Wrapper>
   )
 }
 
-export default Build
+export default BurgerBuilds
