@@ -5,7 +5,6 @@ import React, {
 import { BurgerContext } from '../context/BurgerContextWrapper';
 import Wrapper from '../components/Wrapper';
 import {
-  StyledLink,
   BuildSection,
 } from '../components/StyledComponents';
 import BurgerBuild from '../components/BurgerBuild';
@@ -15,11 +14,13 @@ import Loader from '../components/Loader/Loader';
 import DialogPopup from '../components/DialogPopup';
 
 const BurgerBuilder = () => {
-  const { ingredients, addBurger } = useContext(BurgerContext);
+  const {
+    ingredients, addBurger, addBurgerToCart,
+  } = useContext(BurgerContext);
   const [burgerContents, setBurgerContents] = useState([]);
   const [burgerName, setBurgerName] = useState('');
   const [loading, setLoading] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const [modalData, setModalData] = useState({ data: null, visible: false });
 
   const onChangeBurgerName = (e) => setBurgerName(e.target.value);
 
@@ -52,22 +53,29 @@ const BurgerBuilder = () => {
     setLoading(true);
     const value = { burgerContents, burgerName }
     addBurger(value)
-      .then(() => {
+      .then(({ newBuild }) => {
         setLoading(false);
-        setShowModal(true);
+        setModalData({
+          visible: true,
+          data: newBuild.id,
+        });
         removeAllStuffs();
       })
   }
 
   return (
     <Wrapper title="Build your burger">
-      <StyledLink to="/">Display burgers</StyledLink>
       {loading && (<Loader />)}
-      {showModal && (
+      {modalData.visible && (
         <DialogPopup
           okText="Add burger to cart"
           cancelText="Close"
-          onCancel={() => setShowModal(false)}
+          message="burger added"
+          onOk={() => {
+            addBurgerToCart(modalData.data)
+            setModalData({ data: null, visible: false })
+          }}
+          onCancel={() => setModalData({ data: null, visible: false })}
         />
       )}
       <BuildSection>

@@ -4,9 +4,6 @@ import React, {
 import { BurgerContext } from '../context/BurgerContextWrapper';
 import BuildsList from '../components/BuildsList';
 import Wrapper from '../components/Wrapper';
-import {
-  StyledLink,
-} from '../components/StyledComponents';
 
 const BurgerBuilds = () => {
   const {
@@ -16,7 +13,6 @@ const BurgerBuilds = () => {
   const { builds } = burgerValues;
   return (
     <Wrapper>
-      <StyledLink to="/build">Build your burger!</StyledLink>
       <BuildsList
         builds={builds}
       />

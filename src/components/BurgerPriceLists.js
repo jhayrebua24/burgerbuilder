@@ -1,8 +1,6 @@
-import React, {
-  useEffect,
-  useState,
-} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   BurgerPrice,
   Button,
@@ -60,6 +58,7 @@ const BurgerPriceLists = (props) => {
           onClick={onSubmitBurger}
           block
         >
+          <FontAwesomeIcon icon="check-square" />
           Save
         </Button>
       </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   BurgerIngredients,
   ContentSelector,
@@ -22,10 +23,10 @@ const BurgerIngredientsMenu = (props) => {
           <Button
             disabled={!burgerContents.includes(ingr.id)}
             onClick={() => removeStuffOnBurger(ingr.id)}
-            color="#e74c3c"
+            code="danger"
             type="button"
           >
-            -
+            <FontAwesomeIcon icon="minus-square" />
           </Button>
           <span>{ingr.name}</span>
           <Button
@@ -33,15 +34,16 @@ const BurgerIngredientsMenu = (props) => {
             type="button"
             disabled={burgerContents.length > 7}
           >
-            +
+            <FontAwesomeIcon icon="plus-square" />
           </Button>
         </ContentSelector>
       ))}
       <Button
-        color="#e74c3c"
+        code="danger"
         disabled={burgerContents.length < 1}
         onClick={removeAllStuffs}
       >
+        <FontAwesomeIcon icon="trash" />
         REMOVE ALL
       </Button>
       <h5>Limited up to 8 stuffs only!</h5>

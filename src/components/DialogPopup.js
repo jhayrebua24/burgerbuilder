@@ -10,10 +10,12 @@ const DialogPopup = ({
   cancelText,
 }) => (
   <Dialog>
-    <div>
-      <p>{message}</p>
-      <Button onClick={onOk} block>{okText}</Button>
-      <Button onClick={onCancel} color="#e74c3c" block>{cancelText}</Button>
+    <div className="dialog">
+      <div className="dialog-body">
+        <p>{message}</p>
+        <Button onClick={onOk} block>{okText}</Button>
+        <Button onClick={onCancel} color="#e74c3c" block>{cancelText}</Button>
+      </div>
     </div>
   </Dialog>
 )

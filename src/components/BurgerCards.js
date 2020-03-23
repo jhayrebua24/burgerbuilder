@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Burger from './Burger';
-import { Cards } from './StyledComponents';
+import { Cards, Button } from './StyledComponents';
 import { BurgerContext } from '../context/BurgerContextWrapper';
 
 const BurgerCards = ({ data }) => {
-  const { ingredients } = useContext(BurgerContext);
+  const { ingredients, addBurgerToCart, deleteBurger } = useContext(BurgerContext);
   const getBurgerPrice = data.contents.reduce((accu, val) => {
     const ingr = ingredients.find((ingredient) => ingredient.id === val);
     let price = 0;
@@ -18,7 +19,30 @@ const BurgerCards = ({ data }) => {
       <Burger
         contents={data.contents}
       />
-      <p>{`PHP ${getBurgerPrice}`}</p>
+      <section>
+        <p>{`PHP ${getBurgerPrice}`}</p>
+        <div className="options">
+          <Button
+            type="button"
+            onClick={() => addBurgerToCart(data.id)}
+            block
+          >
+            <FontAwesomeIcon icon="shopping-cart" />
+            Add to cart
+            {data.onCart ? `(${data.onCart})` : null}
+          </Button>
+          <Button
+            type="button"
+            code="danger"
+            onClick={() => deleteBurger(data.id)}
+            block
+          >
+            <FontAwesomeIcon icon="trash" />
+            Delete
+          </Button>
+        </div>
+      </section>
+      {/* <div>test</div> */}
     </Cards>
   )
 }

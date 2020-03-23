@@ -7,6 +7,9 @@ import { v4 as uuidv4 } from 'uuid';
 import {
   ADD_BUILD,
   DELETE_BUILD,
+  ADD_TO_CART,
+  REMOVE_FROM_CART,
+  RESET_CART,
 } from './actions';
 import reducer from './BurgerReducer';
 
@@ -40,32 +43,41 @@ const BurgerContextWrapper = ({ children }) => {
         id: uuidv4(),
         name: 'Double Patty',
         contents: [1, 1, 2],
+        onCart: 1,
       },
       {
         id: uuidv4(),
         name: 'Cheeseburger',
         contents: [1, 2],
+        onCart: 0,
       },
       {
         id: uuidv4(),
         name: 'Burger',
         contents: [1],
+        onCart: 0,
       },
       {
         id: uuidv4(),
         name: 'Extreme Burger',
         contents: [4, 1, 2, 3, 1, 4, 2, 3],
+        onCart: 0,
       },
     ],
   };
   const [burgerValues, dispatch] = useReducer(reducer, defaultValue);
 
-  const addBurger = (value) => new Promise((resolve, reject) => {
+  const addBurger = (value) => new Promise((resolve) => {
     const { burgerName, burgerContents } = value;
+    let newName = burgerName.toString().trim()
+      .toLowerCase().replace(/(?<= )[^\s]|^./g, (a) => a.toUpperCase());
+    const countExist = burgerValues.builds.filter((build) => build.name === newName).length;
+    if (countExist) newName = `${newName}(${countExist})`;
     const newBuild = {
       id: uuidv4(),
-      name: burgerName,
+      name: newName,
       contents: burgerContents,
+      onCart: 0,
     }
 
     dispatch({
@@ -75,7 +87,46 @@ const BurgerContextWrapper = ({ children }) => {
       },
     })
 
-    setTimeout(() => resolve('Burger Added'), 1000);
+    setTimeout(() => resolve({
+      message: 'Burger added',
+      newBuild,
+    }), 1000);
+  })
+
+  const addBurgerToCart = (id) => dispatch({
+    type: ADD_TO_CART,
+    payload: {
+      id,
+    },
+  })
+
+  const deleteBurger = (deletedId) => new Promise((resolve) => {
+    dispatch({
+      type: DELETE_BUILD,
+      payload: {
+        deletedId,
+      },
+    });
+
+    setTimeout(() => resolve({
+      message: 'Burger deleted!',
+    }),
+    1000);
+  })
+
+  const removeBurgerToCart = (id, removeAll = 0) => dispatch({
+    type: REMOVE_FROM_CART,
+    payload: {
+      id,
+      removeAll,
+    },
+  })
+
+  const resetCart = () => new Promise((resolve) => {
+    dispatch({
+      type: RESET_CART,
+    })
+    setTimeout(() => resolve('Cart reset!'), 1000);
   })
 
   return (
@@ -84,6 +135,10 @@ const BurgerContextWrapper = ({ children }) => {
         burgerValues,
         ingredients,
         addBurger,
+        addBurgerToCart,
+        deleteBurger,
+        removeBurgerToCart,
+        resetCart,
       }}
     >
       {children}
